@@ -49,6 +49,20 @@ $(document).ready(function(){
       $(".plusbutton").mouseleave(function(ev){
         $(this).removeClass("pointer");
       });
+
+      $("#testinput").blur(function(ev){
+        var usertext = $(this).prop("value")
+        var spointer = jQuery("<span/>", {
+            id: "s4",
+            class: "all",
+            html: usertext,
+        });
+
+        $(this).parent().prepend(spointer);
+        $("#testinput").remove();
+      });
+
+
 });
 
 </script>
@@ -79,10 +93,19 @@ $(document).ready(function(){
      <div class="all tagshared parenttagcont">
           <div class="all tagshared plusbutton">&oplus;</div>
      </div>
+     <br /><br />
+     <div class="all tagshared parenttagcont">
+       <input id="testinput" class="all" value="Hello." />
+     </div>
   </body>
 </html>
 
 <!--
 Things learned:
-
+1) A general method to access a nodes attributes is just to use the
+attr() call, after selecting it uniquely.
+2) Prop vs Attr(): the former refers to the DOM model elements; the
+latter refers to (immutable) HTML5 markup that is loaded.
+3) Deleting an element: just select it and use remove(); will be removed
+from DOM.
 -->
