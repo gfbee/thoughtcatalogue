@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="application/javascript">
+
+var numberSeq = [];
+
+function buttonsUp(){
+  $(".number").removeClass("down").addClass("up");
+}
+
+function addTagContainer() {
+
+}
+
+$(document).ready(function(){
+
+    $(".plusbutton").click(function(ev){
+      var tagpointer = jQuery("<div/>", {
+        id: "foo",
+        class: "all tagshared tagcont",
+      });
+
+      var span1pointer = jQuery("<span/>", {
+        id: "s1",
+        class: "all",
+        text: "Greasing",
+      });
+
+      var span2pointer = jQuery("<span/>", {
+        id: "s3",
+        class: "all xbutton",
+        html: "&otimes;",
+      });
+
+        $(this).parent().prepend(tagpointer);
+
+        $("#foo").append(span1pointer);
+        $("#foo").append(span2pointer);
+
+      });
+
+      $(".plusbutton").mouseenter(function(ev){
+        $(this).addClass("pointer");
+      });
+
+      $(".plusbutton").mouseleave(function(ev){
+        $(this).removeClass("pointer");
+      });
+});
+
+</script>
+
+<style type="text/css">
+
+.tester {color:green; font-size:10pt;}
+  .all {background-color:black;color:#ff8000;}
+
+  .tagshared {display: inline-block; width:auto;
+              border-style:inset; border-color: #ff8000;}
+
+  .parenttagcont {border-width: 5px; border-radius: 10px;
+                  padding: 5px;}
+
+  .pointer {cursor:pointer;color:red;}
+
+  .tagcont {height: 10px; border-width:2px; border-radius: 5px;
+          font-size: 20px; font-style: serif;
+          padding: 0px 5px 20px 5px; margin: 2px 0px 2px 0px;}
+
+   .plusbutton {padding: 3px 0px 0px 0px;
+   height: 22px; border-width:2px; border-radius: 5px;}
+</style>
+</head>
+   <body class= "all">
+     <div class="all tagshared parenttagcont">
+          <div class="all tagshared plusbutton">&oplus;</div>
+     </div>
+  </body>
+</html>
+
+<!--
+Things learned:
+
+-->

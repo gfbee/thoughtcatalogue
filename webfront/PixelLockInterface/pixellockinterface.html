@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="application/javascript">
+
+var numberSeq = [];
+
+function buttonsUp(){
+  $(".number").removeClass("down").addClass("up");
+}
+
+$(document).ready(function(){
+
+    $("#submit").click(function(ev){
+        alert(numberSeq);
+        buttonsUp();
+        numberSeq = [];
+        ev.stopImmediatePropagation();
+    });
+
+    $("#clear").click(function(ev){
+        buttonsUp();
+        numberSeq = [];
+        ev.stopImmediatePropagation();
+    });
+
+    $(".number").click(function(ev){
+        numberSeq.push(ev.target.innerHTML);
+        $(this).removeClass("up").addClass("down");
+      });
+});
+
+
+</script>
+
+<style type="text/css">
+  body {background-color:black;}
+  .all {border-style:inset; border-color: #ff8000;}
+
+  .container {border-width: 5px; border-radius: 10px;
+              padding: 15px 15px 15px 15px; margin: 10px  ; width:155px;}
+
+  .number {display: inline-block;
+          height: 20px; margin: 2px 0px 2px 0px;
+          border-width:2px; border-radius: 5px;
+          padding: 20px 5px 5px 20px;
+          font-size:20px; font-style: serif;}
+
+  .singledigit {padding: 20px 0px 5px 20px; width:25px;}
+
+  .doubledigit {padding: 20px 5px 5px 20px; width:20px;}
+
+  .up {background-color: black; color:#ff8000; }
+
+  .down {background-color: #ff8000;color:black;border-style:outset;}
+
+</style>
+</head>
+   <body>
+     <div class=" all container">
+       <div class="all number singledigit up">&#160;&#160;0</div>
+       <div class="all number singledigit up">&#160;&#160;1</div>
+       <div class="all number singledigit up">&#160;&#160;2</div>
+       <div class="all number singledigit up">&#160;&#160;3</div>
+       <div class="all number singledigit up">&#160;&#160;4</div>
+       <div class="all number singledigit up">&#160;&#160;5</div>
+       <div class="all number singledigit up">&#160;&#160;6</div>
+       <div class="all number singledigit up">&#160;&#160;7</div>
+       <div class="all number singledigit up">&#160;&#160;8</div>
+       <div class="all number singledigit up">&#160;&#160;9</div>
+       <div class="all number doubledigit up">10</div>
+       <div class="all number doubledigit up">11</div>
+       <div class="all number doubledigit up">12</div>
+       <div class="all number doubledigit up">13</div>
+       <div class="all number doubledigit up">14</div>
+       <div id="clear" class="all number doubledigit up">&#160;&#x2297;</div>
+       <div class="all number doubledigit up">15</div>
+       <div id="submit" class="all number doubledigit up">&#160;&#x21B3;</div>
+     </div>
+  </body>
+</html>
+
+<!--
+Things learned:
+1) To get a border to display, you need the border-style element.
+2) Use inline-block instead of float and clear
+3) when selecting IDs with jquery; they need to be unique. Classes are not unique,
+but IDs must be when used.
+4) I don't understand the in depth details of CSS classes and subclasses. I will
+need to read about these later.
+5) Event handlers are ordered by registration. For multiple event handlers per node,
+the one registered first is hit first. StopImmediatePropogation() to cancel all other
+registered events if the event you want is first listed. Another way to get around
+this is to use IF conditions on the event object state, but this can get ugly too.
+
+-->

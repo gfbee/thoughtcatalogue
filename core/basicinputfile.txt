@@ -1,0 +1,30 @@
+'''
+This is some text
+there are many texts like it
+but this is my own.
+''''
+Tag1:Tag2:Tag3:Tag4
+
+'''
+List of things to do:
+1) Get Money
+2) ???
+3) Profit
+''''
+a:b:c:d:e:f:g
+
+'''
+ The interested
+and informed citizen can congratulate himself on his lofty state of interest and
+information and neglect to see that he has abstained from decision and action.
+In short, he takes his secondary contact with the world of political reality, his
+reading and listening and thinking, as a vicarious performance (p. 565). He
+comes to mistake knowing about problems of the day for doing something
+about them. His social conscience remains spotlessly clean. He is concerned.
+He is informed. And he has all sorts of ideas as to what should be done. But,
+after he has gotten through his dinner and after he has listened to his favored
+radio programs and after he has read his second newspaper of the day, it is
+really time for bed.
+''''
+NarcotizingDysfunction:AmericanLife:FirstWorldProblems
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="application/javascript">
+
+var numberSeq = [];
+
+function buttonsUp(){
+  $(".number").removeClass("down").addClass("up");
+}
+
+$(document).ready(function(){
+
+    $(".xbutton").click(function(ev){
+        $(this).parent().hide();
+      });
+
+      $(".xbutton").mouseenter(function(ev){
+        $(this).addClass("pointer");
+      });
+
+      $(".xbutton").mouseleave(function(ev){
+        $(this).removeClass("pointer");
+      });
+});
+
+
+</script>
+
+<style type="text/css">
+  .all {background-color:black;color:#ff8000;}
+
+  .tagshared {display: inline-block; width:auto;
+              border-style:inset; border-color: #ff8000;}
+
+  .parenttagcont {border-width: 5px; border-radius: 10px;
+                  padding: 5px;}
+
+  .pointer {cursor:pointer;color:red;}
+
+  .tagcont {height: 10px; border-width:2px; border-radius: 5px;
+          font-size: 20px; font-style: serif;
+          padding: 0px 5px 20px 5px; margin: 2px 0px 2px 0px;}
+
+   .xbutton {margin: 3px 0px 0px 0px;}
+</style>
+</head>
+   <body class= "all">
+     <div class="all tagshared parenttagcont">
+        <div class="all tagshared tagcont">
+          <span class="all ">NarcotizingDysfunction</span>
+          <span class="all xbutton">&otimes;</span>
+        </div>
+        <div class="all tagshared tagcont">
+          <span class="all">DistractionEconomy</span>
+          <span class="all xbutton">&otimes;</span>
+        </div>
+        <div class="all tagshared tagcont">
+          <span class="all">ClickjackHeadlines</span>
+          <span class="all xbutton">&otimes;</span>
+        </div>
+        <div class="all tagshared tagcont">
+          <span class="all">ClickjackHeadlines</span>
+          <span class="all xbutton">&otimes;</span>
+        </div>
+     </div>
+  </body>
+</html>
+
+<!--
+Things learned:
+1) Clases are just anded together sequentially when you do "class1 class2"
+2) Instead of changing .css() in place on an element, just use a small class and
+add/remove it.
+3) Use the $(this).parent() method to access the most immediate parent.
+-->
