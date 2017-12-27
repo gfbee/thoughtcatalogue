@@ -13,7 +13,6 @@ function buttonsUp(){
 }
 
 function addTagContainer() {
-
 }
 
 $(document).ready(function(){
@@ -27,12 +26,12 @@ $(document).ready(function(){
       var span1pointer = jQuery("<span/>", {
         id: "s1",
         class: "all",
-        text: "Greasing",
+        text: "aTag ",
       });
 
       var span2pointer = jQuery("<span/>", {
         id: "s3",
-        class: "all xbutton",
+        class: "all",
         html: "&otimes;",
       });
 
@@ -53,11 +52,10 @@ $(document).ready(function(){
 });
 
 </script>
-
 <style type="text/css">
 
 .tester {color:green; font-size:10pt;}
-  .all {background-color:black;color:#ff8000;}
+  .all {background-color:black;color:#ff8000;font-size:20pt;}
 
   .tagshared {display: inline-block; width:auto;
               border-style:inset; border-color: #ff8000;}
@@ -67,13 +65,15 @@ $(document).ready(function(){
 
   .pointer {cursor:pointer;color:red;}
 
-  .tagcont {height: 10px; border-width:2px; border-radius: 5px;
-          font-size: 20px; font-style: serif;
-          padding: 0px 5px 20px 5px; margin: 2px 0px 2px 0px;}
+  .tagcont {height: 12px; border-width:2px; border-radius: 5px;
+         font-style: serif;
+          padding: 0px 5px 20px 5px; margin: 2px 0px 2px 5px;}
 
-   .plusbutton {padding: 3px 0px 0px 0px;
-   height: 22px; border-width:2px; border-radius: 5px;}
+   .plusbutton {padding: 0px 0px 0px 0px;
+    border-width:2px; border-radius: 5px;}
+
 </style>
+
 </head>
    <body class= "all">
      <div class="all tagshared parenttagcont">
