@@ -12,34 +12,41 @@ function buttonsUp(){
   $(".number").removeClass("down").addClass("up");
 }
 
-function addTagContainer() {
+function processTagInput() {
+  var usertext = $(this).prop("value");
+  $(this).hide();
+  var spoint = jQuery("<span/>", {
+      id: "s2",
+      class: "all",
+      html: usertext,
+  });
+  $(this).parent().prepend(spoint);
 }
 
 $(document).ready(function(){
-
     $(".plusbutton").click(function(ev){
-      var tagpointer = jQuery("<div/>", {
-        id: "foo",
+      var tagpoint = jQuery("<div/>", {
+        id: "t1",
         class: "all tagshared tagcont",
       });
 
-      var span1pointer = jQuery("<span/>", {
-        id: "s1",
-        class: "all",
-        text: "aTag ",
+      var inputpoint = jQuery("<input/>", {
+        id: "i1",
+        class: "all ibox",
+        value: "...",
       });
 
-      var span2pointer = jQuery("<span/>", {
-        id: "s3",
+      var buttonpoint = jQuery("<span/>", {
+        id: "b1",
         class: "all",
         html: "&otimes;",
       });
 
-        $(this).parent().prepend(tagpointer);
+        $(this).parent().prepend(tagpoint);
 
-        $("#foo").append(span1pointer);
-        $("#foo").append(span2pointer);
-
+        $("#t1").append(inputpoint);
+        $("#t1").append(buttonpoint);
+        $("#i1").on("blur", processTagInput);
       });
 
       $(".plusbutton").mouseenter(function(ev){
@@ -50,19 +57,8 @@ $(document).ready(function(){
         $(this).removeClass("pointer");
       });
 
-      $("#testinput").blur(function(ev){
-        var usertext = $(this).prop("value")
-        var spointer = jQuery("<span/>", {
-            id: "s4",
-            class: "all",
-            html: usertext,
-        });
-
-        $(this).parent().prepend(spointer);
-        $("#testinput").remove();
-      });
-
-
+      //$("input").blur(function(ev){
+      //});
 });
 
 </script>
@@ -86,16 +82,13 @@ $(document).ready(function(){
    .plusbutton {padding: 0px 0px 0px 0px;
     border-width:2px; border-radius: 5px;}
 
+    .ibox {width:100px;height:28px;}
 </style>
 
 </head>
    <body class= "all">
      <div class="all tagshared parenttagcont">
           <div class="all tagshared plusbutton">&oplus;</div>
-     </div>
-     <br /><br />
-     <div class="all tagshared parenttagcont">
-       <input id="testinput" class="all" value="Hello." />
      </div>
   </body>
 </html>
@@ -108,4 +101,9 @@ attr() call, after selecting it uniquely.
 latter refers to (immutable) HTML5 markup that is loaded.
 3) Deleting an element: just select it and use remove(); will be removed
 from DOM.
+4) Using body selector event listener registration does not work width
+dyanmically generated DOM elements. the .ON() method must be used
+after the tag has been generated in order to register the event handler.
+5) Is function(ev) boilerplate, or does it involve some jQuery magic.
+
 -->
