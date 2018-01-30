@@ -1,0 +1,232 @@
+\documentclass[8pt,a4paper]{extarticle}
+%\documentclass[8pt,twocolumn,a4paper]{extarticle}
+%\documentclass[6pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{setspace} 
+\usepackage{float}
+\usepackage{url}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{multicol}
+
+\pagecolor{black}
+\setlist{nolistsep}
+\topmargin -2cm
+\oddsidemargin -1.5cm
+\evensidemargin -1.5cm
+\textwidth 18.75cm
+\textheight 26cm
+\linespread{1.00}
+\color{YellowOrange}
+
+%Other Colors: ForestGreen,Cerulean,Salmon,Purple, Red, White
+
+\twocolumn
+\title{Front End Visualization Notes:}
+\author{Sean al-Baroudi}
+
+\begin{document}
+
+\newcommand{\mitem}{\item[$\square$]}
+\newcommand{\mmitem}{\item[$\triangledown$]}
+
+\maketitle
+\section*{aaa}
+
+\begin{itemize}
+\item When a webpage is loaded, there is a difference between the \textbf{HTML document}, and the \textbf{DOM model}. The page that you see loaded is an instance of the DOM model, that was interpreted from the HTML document. 
+\item Changes in the DOM done dynamically have nothing to do with HTML
+\item Hiearchy of Objects in DOM Model:
+\begin{enumerate}
+\item Window
+\item Document
+\item HTML
+\item BODY...and all its nested objects.
+
+\end{enumerate}
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+
+\end{itemize}
+
+
+
+\begin{itemize}
+\item JQuery is a JavaScript Framework for implementing advanced functionality,
+and hiding common boilerplate that occurs from basic JavaScript.
+\item JQuery centers around \textit{Selectors}, which are search operations that
+find DOM elements and return a set like structure. 
+\item Given a set of elements (or single one), \textbf{Actions} can be performed on such elements. Mutation, or filtering of the elements (changing the set being operated on) are common things a developer might do.
+\item Selector Syntax:
+
+\begin{verbatim}
+ $(selector1,selector2,...).action()
+\end{verbatim}
+
+The \textbf{$\$$ }is a symbol that indicates a jQuery call is about to be defined. 
+
+(selector) can be anything - types of DOM tags to unique IDs for elements in our DOM tree. For every selector expression, jQuery searches the DOM tree for matching elements, and appends set results to a chronological list.
+
+(actions) involve callbacks or actual functions, that affect the selected set in some way.
+
+\item You can of course nest and chain jQueries. As actions also return sets, this can be done many times in a row to crush code into one line.
+
+
+\item Basic JQuery Start up Code:
+
+\begin{verbatim}
+$(document).ready(function() {
+
+<put code here>
+
+});
+
+\end{verbatim}
+
+Here, the entire document was selected. an Event Listener has been added, with the condition that it triggers when the DOM model is fully loaded. A anonymous call back function is launched, that executes whatever jQuery commands you specify.
+
+
+\item \textbf{Attributes vs Properties:} The former refers to meta-data in the HTML document. The latter refers to meta-data in the DOM tree; Properties are mutable; attributes are generally not. Use the \textbf{prop()} function to alter node properties.
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+
+\end{itemize}
+
+\subsection*{Understanding Event Handling and Listening (W3 Specification):}
+
+\begin{itemize}
+\item The model is very complex. For the dynamic DOM tree, javascript can 
+setup event listeners for specific nodes in the tree. \textbf{Every node in the tree can have multiple registered event listeners.} 
+
+\item \textbf{Events per node are registered in order} (so earlier registered events are hit first).
+\item You can also have multiple event handlers for the same event type, on the same node; again, they are executed relative to registration order.
+\item When a user causes an interaction event on a webpage in the browser, this
+causes the following to occur:
+
+\begin{enumerate}
+\item A user interaction/browser signal occurs; an event with a possible target node is created.
+\item This event is put into the browser's Event Queue.
+\item The browser will eventually act on the next element in the Event Queue (pop). The following set of actions occur:
+\begin{enumerate}
+\item From the DOM root, a Propogation Path to the target node is created (a list of nodes). 
+\item \textbf{Capture Phase:} For every ancestor in the Propogation Path, the de-queued event is checked against each ancestor's event listeners. Ancestors who are capturers may  act in this phase.
+\item \textbf{At Target Phase:} The actual element that was interacted with is found. The element's listeners are checked with the event. Some may trigger and execute.
+\item  \textbf{Bubbling Phase:} Propogation path is backtracked. And each ancestor's event listeners are again checked with the event. They may or may not act again, depending on their configuration.
+\end{enumerate}
+\item Bubbling Phase can be turned off in jQuery; and registering anscestor event triggers is also optional. For most things, we have event triggers at the actual node the user has interacted with.
+\item
+
+\item Low Level Code to add an Event Listener (in Javascript):
+
+\begin{verbatim}
+target.addEventListener(EventType, listener, T/F)
+\end{verbatim}
+
+jQuery wraps these calls in its library. Target is the element in question, EventType is a user action (click, hover..), listener is our function that responds to the event in a predefined way. True means we have a Capture phase. False means we have Bubbling Phase (the \textit{default} in jQuery).
+
+\end{enumerate}
+\end{itemize}
+
+\subsection*{Implementation of W3 model in jQuery:}
+\begin{itemize}
+\item In jQuery, Bubbling is the default, but Capturing is not.
+\item For more fine grained control, there are two stop methods to stop propogation of events.
+\begin{enumerate}
+\item event.stopPropogation(): This method will allow all registered events at the target to finish executing; but any bubbled ancestor event handlers will be prevented from firing.
+
+\textbf{[Image]}
+
+\item event.stopImmediatePropogation(): Event handlers on the current target will be stopped, in addition to bubbling events with target ancestors.
+
+\textbf{[Image]}
+
+\end{enumerate}
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\end{itemize}
+
+\subsection*{Dealing with 1st Class Functions in JS:}
+\begin{itemize}
+\item Functions are mutable objects in JS. You can add properties to them after they are made.
+\item First Class Function: a function that can be used the same way as variables in a program. For example, a 1st class function can:
+\begin{enumerate}
+\item ...be generated at run time, and not interp/compile time.
+\item ...be stored in a data structure.
+\item ...be passed as an argument.
+\item ...returned as a value to another function.
+\item ...be assigned to another reference name.
+
+\end{enumerate}
+\item \textbf{Higher Order Function:} One that accepts and returns other functions.
+\item \textbf{Invoking:} is another name for calling a function.
+\item Function Declaration/Statement: A block of code with a specified function name. This is stored in memory after being read.
+\item Function Expression: is a block of code (anonymous - no name) that returns a value when executed.
+\item When a function name is specified by itself in a statement, this references the body of code (not invoked).
+\item To invoke the function, we state the name with Parens () and arguments after it. This runs the block of code and returns a value.
+\item
+\item
+\item
+\item
+\item
+\item
+
+\end{itemize}
+
+\subsection*{Glossary:}
+\begin{itemize}
+\item \textbf{Event Bubbling:} Refers to passing the event back up the propogation path to ancestors, \textbf{after} the target event listener(s) have activated.
+\item \textbf{Event Capturing:} When an event matches an event handler that is registered to one of our DOM elements.
+\item \textbf{Event Type:} What kind of action has occured on the page - "click", "blur", "load", "mouseover", etc.
+\item \textbf{Bubbling:} A property an event can have. If it bubbles, it will go back up the propogation path after the target handler(s) have compelted.
+\item \textbf{Capturing:} A property an event can have; this means that ancestors of the target may operate on the event, with suitable event handlers.
+\item 
+
+\end{itemize}
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{D3Tut}
+\url{https://www.dashingd3js.com}
+\bibitem{Bostok}
+\url{https://bost.ocks.org/mike/join/}
+\bibitem{Tim Knight}
+\url{https://timmknight.github.io/2015/first-class-functions-javascript/}
+\bibitem{StatementExpression}
+\url{https://stackoverflow.com/questions/4728073/what-is-the-difference-between-an-expression-and-a-statement-in-python}
+\bibitem{1stclassfunction1}
+\url{https://hackernoon.com/javascript-and-functional-programming-an-introduction-286aa625e26d}
+\bibitem{1stclassfunction2}
+\url{https://hackernoon.com/javascript-and-functional-programming-pt-2-first-class-functions-4437a1aec217}
+	
+\end{thebibliography}
+
+
+\end{document}

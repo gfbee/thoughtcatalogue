@@ -1,0 +1,55 @@
+
+.all {background-color:black;color:#ff8000;font-size:16pt;font-style: serif;}
+
+.modeselectcontain {display:block;height:auto;
+                    border-style:inset; border-color: #ff8000; border-radius: 5px; border-width: 3px;
+                    padding:5px;width:100px;
+                    margin: 0px 0px 5px 0px;}
+
+.modeselectbutton {display:inline;height:auto;width:auto;
+                  border-style:inset; color:#0198e1;border-color:#0198e1; border-radius: 5px; border-width: 3px;}
+
+.modeselectbuttoff {display:inline;height:auto;width:auto;
+                  border-style:inset; color:#ff8000; border-color: #ff8000; border-radius: 5px; border-width: 3px;}
+
+.modeoptioncontain {display:block;height:auto;
+                    border-style:inset; border-color: #ff8000; border-radius: 5px; border-width: 3px;
+                    padding:5px;width:500px;
+                    margin: 0px 0px 5px 0px;}
+
+.hideobj {display:none;}
+
+.addtblobbutton {}
+
+.addtblobbutton {}
+
+
+
+.opbutton {display:inline;height:auto;width:auto;
+                  border-style:inset; color:#ff8000; border-color:#ff8000;
+                  border-radius: 5px; border-width: 3px; padding: 1px;}
+
+.pointer {cursor:pointer;}
+.hoverhighlight {color:#0198e1;}
+
+
+.inputtext {display:inline; height:auto;width:200px;}
+
+.operateon {border-color:#0198e1;color:#0198e1;}
+
+.operateoff {}
+
+.optsbeneath {display:block;margin-top:8px;height:auto; border-style:inset;
+              border-color: #ff8000; border-radius: 5px; border-width: 3px;
+              padding:10px 0px 10px 7px;width:503px; margin: 0px 0px 5px 0px;}
+
+.tagtextbox {}
+
+.submitbutton {}
+
+.submitbuttoff {}
+
+.workspacecontain {display:block;height:auto;
+                    border-style:inset; border-color: #ff8000; border-radius: 5px; border-width: 3px;
+                    padding:5px;width:500px;
+                    margin: 0px 0px 5px 0px;}

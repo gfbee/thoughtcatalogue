@@ -89,18 +89,29 @@ function generateTextBlob() {
   $("#" + tbId).append(tagboxout);
   $("#" + tagboxId).append(buttonpoint);
   $("#" + oplusId).on("click", addTag);
+  addMouseOver(("#" + oplusId));
+}
+
+function addMouseOver(refName) {
+  $(refName).mouseenter(function(ev){
+      $(this).addClass("pointer");
+    });
+
+  $(refName).mouseleave(function(ev){
+    $(this).removeClass("pointer");
+  });
 }
 
 $(document).ready(function(){
     $("#start").click(generateTextBlob);
-
-    $("#start ").mouseenter(function(ev){
+    addMouseOver("#start");
+/*    $("#start ").mouseenter(function(ev){
         $(this).addClass("pointer");
       });
 
     $("#start").mouseleave(function(ev){
       $(this).removeClass("pointer");
-    });
+    }); */
 });
 
 </script>
