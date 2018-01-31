@@ -33,7 +33,7 @@
 .hoverhighlight {color:#0198e1;}
 
 
-.inputtext {display:inline; height:auto;width:200px;}
+.inputtext {display:inline; height:auto;width:200px; margin-left:5px;}
 
 .operateon {border-color:#0198e1;color:#0198e1;}
 
@@ -51,5 +51,11 @@
 
 .workspacecontain {display:block;height:auto;
                     border-style:inset; border-color: #ff8000; border-radius: 5px; border-width: 3px;
-                    padding:5px;width:500px;
+                    padding:5px;width:90%;
                     margin: 0px 0px 5px 0px;}
+
+.randomoptcontain {display:inline;width:auto;height:auto; margin-right:10px;}
+
+.addmodecontain {display:inline;width:auto;height:auto;}
+
+.hide {display:none;}
