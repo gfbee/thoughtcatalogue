@@ -154,6 +154,7 @@
 
 
       $(document).ready(function(){
+          $("#newtbopt").click(generateTextBlob);
           addMouseOver("addmode");
           addMouseOver("displaymode");
           addMouseOver("relationmode");
@@ -163,6 +164,7 @@
           addMouseOver("diffopt");
           addMouseOver("submitbutton");
           addMouseOver("textonlyopt");
+          addMouseOver("newtbopt");
           addClickMode("addmode");
           addClickMode("displaymode");
           addClickMode("relationmode");
@@ -170,4 +172,5 @@
           addClickSetOps("unionopt");
           addClickSetOps("diffopt");
           addClickRand("randomopt");
+
       });

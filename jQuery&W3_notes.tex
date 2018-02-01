@@ -171,6 +171,84 @@ jQuery wraps these calls in its library. Target is the element in question, Even
 \item
 \end{itemize}
 
+\subsection*{Basic Javascript:}
+\begin{itemize}
+\item Primitive Data Types: String, Boolean, Number.
+\item Special Constants: NAN, Undefined.
+\item All of the above Primitives \textit{are immutable}; you cannot edit the data "in memory". You make a copy and edit that, and put the transformed data back in place (if you like).
+\item All other data types are Objects. There are two views to this: Associative Arrays, and Objects. They are both equivalent, but use different notations.
+
+\item Associative Arrays (AAs): Are Key value pairs that are stored in a list like structure. Notation as follows:
+
+\begin{verbatim}
+var myAA = {
+	key1:'hello',
+	key2:55,
+	...
+};
+
+OR
+
+var myAA = {};
+myAA['hello'] = 12;
+myAA['goodbye'] = 13;
+\end{verbatim}
+
+The latter method is also used to access the arrays; but we can assign new properties to them as well.
+
+\item Objects are Associative arrays; they really represent syntatic sugar and a different view, when designing data structures. There are three ways to define Objects:
+\item Objects store key value pairs like AAs. These can represent \textit{object fields}, or point to functions and represent \textit{object methods}.
+
+\begin{enumerate}
+\item Making Singletons: Use the Associative Array method (above)
+\begin{verbatim}
+var myAA = {
+	key1:'hello',
+	key2:55,
+	...
+	
+\end{verbatim}
+
+\item Using Object Constructor, adding Properties After:
+
+\begin{verbatim}
+var myObj = new Object();
+myObj.prop1 = 'hello';
+\end{verbatim}
+
+The third method is preferred:
+
+\item Object Constructor Blueprint:
+
+\begin{verbatim}
+function myObjConstructor(arg1, arg2, arg3) {
+	this.arg1 = arg1;
+	....
+
+	this.method1 = function() { ... }
+	this.method2 = function() {...}
+
+
+}
+
+var myObj = new myObjConstructor(1,2....);
+
+\end{verbatim}
+
+\end{enumerate}
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+
+
+\end{itemize}
+
 \subsection*{Dealing with 1st Class Functions in JS:}
 \begin{itemize}
 \item Functions are mutable objects in JS. You can add properties to them after they are made.
@@ -205,10 +283,62 @@ jQuery wraps these calls in its library. Target is the element in question, Even
 \item \textbf{Event Type:} What kind of action has occured on the page - "click", "blur", "load", "mouseover", etc.
 \item \textbf{Bubbling:} A property an event can have. If it bubbles, it will go back up the propogation path after the target handler(s) have compelted.
 \item \textbf{Capturing:} A property an event can have; this means that ancestors of the target may operate on the event, with suitable event handlers.
-\item 
+\item Pseudo-State: Simple subselectors that involve events, and are implemented in css. Subselector denoted by single colon (:), with the following notation:
 
+\begin{verbatim}
+  classname:click {color:#555555;...etc}
+\end{verbatim}
+
+Basic Events that can be used: Focus, Hover, Active, Visited.
+
+\item Pseudo-Element: Allows styling of parts of elements, such as the first letter or line of a text element. subselector specified with double colon ::
+
+\begin{verbatim}
+classname::first-letter {color:red;font-size:72pt;}
+\end{verbatim}
 \end{itemize}
 
+\section*{Chromium DevTools: Basic Usage:}
+\begin{itemize}
+\item \textbf{Tabs:}
+\begin{enumerate}
+\item \textbf{Elements:} For every element, we can look at attached CSS styles, Event Listeners, Properties...etc 
+\item Console: This runs after all javascript compiled for page; we can run functions or define new objects in our RT env.
+\item Sources: Folder structure of all sources; we can view and edit each source. Note: JS Code in static HTML document cannot be edited; put in separate file.
+\item Network: Examine Gets, Post, Puts, and other requests.
+\end{enumerate}
+\item Debugging cccurs in the Sources Pane. There are three panels:
+\begin{itemize}
+\item File Navigator
+\item Code Editor
+\item JS Debug Pane: Watch Statements, Call Stack, Scope, Breakpoint Area, Breakpoint Selectors (various catagories and types).
+\end{itemize}
+\item \textbf{Watch Statements:} are global expressions that evaluate to a value, as the script runs. Depending on scope, they may or may not be defined.
+\textbf{Call Stack:} Shows the functional stack upto the Break Point (BP you have set)
+\textbf{Scope:} Shows the local variables involved in the block your current BP is in.
+\item \textbf{Breakpoint Area:} Lists every breakpoint you have set; you can toggle on and off.
+\item \textbf{Types of Break Points:} Functional, Exact line of code (click in code editor Left Side), By Event Type
+\item \textbf{Very Simple Debug Method:}
+\begin{enumerate}
+\item ID lines of code, functions that cause problem. Set BPs.
+\item Blackbox deep library calls, to not get lost in call stack (such as JQuery)
+\item Examine Code Running: Look at Scope, Narrow BPs, test Hypotheses and assumptions with Watch Statements.
+\item Attempt a live fix
+\item Retest code again (go to 3) until problem is found.
+\item Implement fix in actual code.
+\end{enumerate}
+
+\item Note: Code edited only reflects running copy; not files you are editing in an IDE/Editor. You cannot save to these files because of Sandboxing (generally)
+\item
+\item
+\item 
+\item
+\item
+\item
+\item
+
+\item \textbf{Things to learn later:} Code Minification, Cookie inspection and usage, Animation inspections, Tabs: Memory, Application, Security, Audits.
+\end{itemize}
 
 
 \begin{thebibliography}{9}
