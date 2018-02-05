@@ -7,31 +7,31 @@ import copy
 
 ''' Version 0.8:
 	Deletion is now basically coded (although not optimized)
-	
-	The code can also unionize and intersect tags as a filtering operaiton.
-	
+
+	The code can also unionize and intersect tags as a filtering operation.
+
 	The Addition functions are stable.
-	
+
 	Coded by Sean al-Baroudi (sean.al.baroudi@gmail.com)
 
 '''
 
 helpString = '''Usage of thoughtcat:
 
-thoughtcat -h -v -O [outputFile] -B -t -P [file] -r [tag] -d [hash/tagname] -D [file] - I -U [tags...]   
-	- h: help
+thoughtcat -h -v -O [outputFile] -B -t -P [file] -r [tag] -d [hash/tagname] -D [file] - I -U [tags...]
+	- h: help.
 	- v: version and my info.
-	- O: specify output filename
+	- O: specify output filename.
 	- B: output all of the blobs!
-	- a: retrieve a list of tags, with their associated hash values
+	- a: retrieve a list of tags, with their associated hash values.
 	- t: output a new line separated list of all tags.
-	- p: print all datastructures (diagnostic) 
+	- p: print all datastructures (diagnostic).
 	- P:: takes in a file with blobs and associated tags.
 	- r: retrieves every blob associated to a particular tag.
 	- d: delete a tag, blob or link.
 	- I:: Form the intersection of all textblobs associated to a list of tags.
 	- U:: Form the union of all textblobs associated to a list of tags.
-	
+
 Other Notes:
 	- if -O not specified, 'output.txt' will be used for the output file name.
 
@@ -39,12 +39,12 @@ Other Notes:
 
 versionString = '''
 
-thoughtcat v0.8. Created by Sean al-Baroudi (sean.al.baroudi@gmail.com)
+thoughtcat v0.8. Created by Sean al-Baroudi (sean.al.baroudi@gmail.com).
 '''
 
 #Our getopt global variables:
 outputFile = "./output.txt" #This is used for tag list, and regular output; we can only do one thing at a time, after all.
-repoFileLocation = "./Repository"
+repoFileLocation = "./repository"
 
 pickleHashTableName = "pickleHash"
 pickleTagDictName = "tagdict"
@@ -69,31 +69,32 @@ def processargs():
 	for o, a in opts:
 		if o == "-h":  #Done
 			print(helpString)
+			sys.exit(2)
 			break
 		elif o == "-v":
 			print(versionString)
 			break
 		elif (o == "-O" and  a != ""):
-			outputFile = a 
-		elif o == "-B": 
+			outputFile = a
+		elif o == "-B":
 			printalltextblobs()
 			break
-		elif o == "-a": 
+		elif o == "-a":
 			writetaglists()
 			break
-		elif o == "-t": 
+		elif o == "-t":
 			writetagstofile()
 			break
-		elif o == "-p": 
+		elif o == "-p":
 			printstructures()
 			break
-		elif (o == "-P" and  a != ""): 
-			pump(a) 
+		elif (o == "-P" and  a != ""):
+			pump(a)
 			break
-		elif (o == "-r" and  a != ""): 
+		elif (o == "-r" and  a != ""):
 			retrievesingletag(a)
 			break
-		elif (o == "-d" and  a != ""): 
+		elif (o == "-d" and  a != ""):
 			removesingleitem(a)
 			break
 		elif (o == "-I"):
@@ -151,13 +152,13 @@ def  writeoplist(argList, gatherList):
 	for tag in argList:
 		tagString = tagString + tag + ":"
 	intFile.write(tagString + ":: \n")
-	
+
 	for hashVal in gatherList:
 		intFile.write(textBlobDict[hashVal] + "\n")
 	intFile.close()
 
 '''
-Signature: List[Strings] -> Void
+Signature: List[String] -> Void
 Purpose: Given a List of Tags, we intesect the tag hash lists and return an output file.
 '''
 def intersecttags(argList):
@@ -180,7 +181,7 @@ def intersecttags(argList):
 
 '''
 Signature: String String -> void
-Purpose: SImply excise a hash value from our tagDict list.
+Purpose: Simply excise a hash value from our tagDict list.
 Note: I don't delete empty tags; they might be useful later.
 '''
 def removehash(hKey, tag):
@@ -188,7 +189,7 @@ def removehash(hKey, tag):
 	if (hKey in tagDict[tag]):
 		hList = tagDict[tag]
 		hList.remove(hKey)
-		tagDict[tag] = hList 
+		tagDict[tag] = hList
 	else:
 		print("Warning: RemoveHash: hkey not in tag list at all; no action taken.")
 
@@ -210,7 +211,7 @@ def removelink(hKey, tag):
 		else:
 			print("RemoveLink: hash key not in text or count Dict; no alteration made")
 
-	
+
 	if (hEx and tEx):
 		if (keyCount  >1):
 			print("RemoveLink: count greater than 1.")
@@ -250,7 +251,7 @@ def removeonetag(aTag):
 '''
 Signature: String[hash] -> void
 Purpose: Obv. We remove blob from countDict and textBlob dict
-We don't worry about the tagDict having undefined links; these are 
+We don't worry about the tagDict having undefined links; these are
 dealt with during access of tags. This avoids an O(mn) time Repo search.
 
 '''
@@ -265,9 +266,9 @@ def removeoneblob(hshstr):
 		print("RemoveOneBlob: The blob to be removed did not exist.")
 
 '''
-Signature: String -> Void 
+Signature: String -> Void
 Purpose: Determine if we have a tag, hash or link and delete accordingly
-Note: An "item" is .anyone of tag, hash or link itself.
+Note: An "item" is any one of: tag, hash or link itself.
 
 '''
 def removesingleitem(arg):
@@ -280,7 +281,7 @@ def removesingleitem(arg):
 		argList = argPart.split(":")
 		removelink(argList[0],argList[1]) #must check if hash exists on its own [***]
 	else:
-		print("Error: Input for -d option not recognized.") 
+		print("Error: Input for -d option not recognized.")
 
 '''
 Signature: String -> Void (output file)
@@ -354,7 +355,7 @@ Note: I have a try/catch here but not with other file code because the other cas
 def pump(inputPath):
 	currBlob = ""
 	currTagLine = ""
-	
+
 	try:
 		inputFile = open(inputPath,"r")
 	except IOError as e:
@@ -365,9 +366,9 @@ def pump(inputPath):
 	textBody = "TB"
 	tagLine="TL"
 	newLine="NL"
-	
+
 	lSTup = (openQuote, "") #doesnt matter that 2nd element is empty when we step into the loop
-	
+
 	for line in inputFile: #remove hardcoding [***]
 		s = lSTup[0]
 		if (s == openQuote and line =="\'\'\'\n"):
@@ -399,7 +400,7 @@ Purpose: Get an MD5 hash value for a string
 def getstringhash(tBlob):
 	hashObj = hashlib.md5(tBlob.encode())
 	return hashObj.hexdigest()
-	
+
 '''
 Signature: String List -> Void
 Purpose: Given a textBlob and Tags, add to our Hash Table and Dictionary of Lists.
@@ -435,7 +436,7 @@ def addlink(hKey, tBlob, tag):
 		tagDict[tag].append(hKey)
 	if(hEx and (not tEx)):
 		print("AddLink: Tag not present, but blob is. ")
-		tagDict[tag] = [hKey] 
+		tagDict[tag] = [hKey]
 		countDict[hKey] = countDict[hKey] + 1
 	if(hEx == False and tEx == False):
 		print('AddLink: no tag or blob; adding both.')
