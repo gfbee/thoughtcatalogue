@@ -7,21 +7,25 @@ var dynamID = {
   //Method: reset currID property to zero.
 }
 
-//Signature: Void -> Intersect
+//Signature: Void -> Int
 //Purpose: Update dynamID by one, and return an ID to a generating function.
 function idUpdate(){
   dynamID.currID = dynamID.currID + 1;
   return (dynamID.currID - 1);
 }
 
+//Signature: Void -> AddModeState Object.
+//Purpose: This is our object constructor for the Add Mode; we produce a Singleton Object.
 function AddModeState() {
   this.numTextBlobs = 0;
   this.textBlobList = [];
+  //Object method.
   this.addTB = function (tbID) {this.textBlobList.push(tbID);}
 }
 
-//Purpose: For Display mode, this is our state object. Its values are updated
-//As the user inputs information.
+//Signature: Void -> DisplayModeState Object
+//Purpose: For Display mode, this is our singleton state object. Its values are updated
+//as the user inputs information.
 function DisplayModeState() {
   this.randOpt = false;
   this.allTags = false;
@@ -32,10 +36,7 @@ function DisplayModeState() {
   this.limit = -1;
 }
 
-//These functional constructors are used when we do a submit, or accept a request
-//from the server. They are not used during the generation of things.
-
-//Signature: String Int Boolean -> Tag object.
+//Signature: String Int Boolean -> Tag Object.
 //Purpose: Our "Blueprint" Constructor for tags.
 //Tags are not used in a mutable way. They can be deleted in entirety, though.
 function Tag(label,id,created) {
@@ -46,8 +47,7 @@ function Tag(label,id,created) {
 
 //Signature: Int, Int(Date) List(Tag Objects) String -> TextBlob Objects.
 //Purpose: This represents an actual textblob; these may be specified by the
-//user, or generated from a Pull Request.
-
+//user (ADD mode), or generated from a Pull Request (DISPLAY mode).
 function TextBlob(id, gettime_date, taglist, textblob) {
   this.id = id;
   this.date = gettime_date;
@@ -56,13 +56,15 @@ function TextBlob(id, gettime_date, taglist, textblob) {
   this.tblob = textblob;
 }
 
-//Here, lets make our global state structures:
+//Lets make our global state structures:
 
 var addModeObj = new AddModeState();
 
-//Below: We implement the GUI support for dyanmic textblobs. This is just the addtextblob.html consider
+//We implement the GUI support for dyanmic textblobs. This is just the addtextblob.html
 //refactored into our current interface code.
 
+//Signature: None
+//Purpose: This function is called when a user blurs() a tag box, after entering input.
 function processTagInput() {
   idIndex = idUpdate();
   var usertext = $(this).prop("value");
@@ -75,6 +77,8 @@ function processTagInput() {
   $(this).parent().prepend(spoint);
 }
 
+//Signature: None.
+//Purpose: This function is called when a user clicks the new tag button in a textBlob box.
 function addTag() {
   idIndex = idUpdate();
   let tagpointId = "t" + idIndex;
@@ -101,9 +105,10 @@ function addTag() {
     $("#" + tagpointId).append(inputpoint);
     $("#" + tagpointId).append(buttonpoint);
     $("#" + inputId).on("blur", processTagInput);
-    $("#" + "b" + idIndex).
 }
 
+//Signature: None
+//Purpose: This generates a new textblob, dynamically (for ADD Mode)
 function generateTextBlob() {
   var idIndex = idUpdate();
   let tbId = "tb" + idIndex;
