@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    var mouseadd = function() {
+        $(this).addClass("pointer");
+        if (!$(this).hasClass("operateon")) {
+          $(this).addClass("hoverhighlight");
+        }
+      };
+
+    var mouseremove = function() {
+      $(this).removeClass("pointer");
+      $(this).removeClass("hoverhighlight");
+    };
+
+    function addMouseOver(refName) {
+      $(("#" + refName)).mouseenter(mouseadd);
+      $(("#" + refName)).mouseleave(mouseremove);
+    }
+
+    //Signature: Object[?] -> String
+    //Purpose: We take the implicit arguements Object
+    //local to our function's scope, and pass it to
+    //this function.
+    function ppArgs(theArgs) {
+      return JSON.stringify(arguments["0"],null,2);
+    }
+
+function A(f) {
+  return function() {
+    console.log(ppArgs(arguments));
+    return f.apply(this, arguments);
+  }
+
+}
+    var getReq = function() {
+      $.ajax({
+        url:"http://localhost:8081",
+        method: "GET"
+      }).done( A(function(data) {
+        // $("#rbox").html(ppArgs(arguments));
+      }));
+    };
+
+    //Prep all of our listeners.
+    $(document).ready(function(){
+        addMouseOver("button");
+        $("#button").on("click", getReq);
+    });
+
+
+    </script>
+    <style type="text/css">
+
+    .all {background-color: black; color: orange;}
+
+    .borders {border-style: inset; border-color: orange;
+    border-width: 2px; border-radius: 5px;}
+
+    .button {display: inline;font-size:14pt;}
+
+    .padding {margin-top:10px;}
+
+    .pointer {cursor:pointer;}
+    .hoverhighlight {color:#0198e1;}
+
+    </style>
+  </head>
+  <body class="all">
+    <div id="container">
+      <div id="button" class="borders button">
+        Click to Send Request to Node.
+      </div>
+    </div>
+    <pre id="rbox" class="borders padding">
+      Our response goes here.
+    </pre>
+
+  </body>
+</html>
+<!--
+
+-->
