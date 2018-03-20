@@ -3,15 +3,17 @@
 
 var spawn = require("child_process").spawn;
 
-var pProcess = spawn('python3',["./simple.py",,]);
+var pProcess = spawn('python3',["../thoughtcat.py","-v"]);
 
 var output = "";
 
 //A process can have stream events attached to it (basic communication).
+//The data we fetched is in a Buffer Object; we need to extract string.
 pProcess.stdout.on('data', function (data) {
-  console.log(data.toString('utf8'));
+  output += data.toString('utf8'); //gather all of the data
   });
 pProcess.on('close', function(stuff) {
-    console.log("A");
-    console.log(stuff);
+    console.log(output);
   });
+
+//Next, lets try to build a

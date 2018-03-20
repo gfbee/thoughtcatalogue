@@ -1,0 +1,10 @@
+{
+	"tb1": {
+		"str1": "It be or it do. There is no try.",
+		"tags": ["Yoda", "StarWars", "DerpSpeak"]
+	},
+	"tb2": {
+		"str1": "This is my string. There are many other strings like it, but this is my own.",
+		"tags": ["FullMetalJacket", "NeedThisDoneFast", "Whatever"]
+	}
+}

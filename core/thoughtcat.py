@@ -355,6 +355,7 @@ Note: I have a try/catch here but not with other file code because the other cas
 def pump(inputPath):
 	currBlob = ""
 	currTagLine = ""
+	inputFile = ""
 
 	try:
 		inputFile = open(inputPath,"r")
@@ -439,7 +440,7 @@ def addlink(hKey, tBlob, tag):
 		tagDict[tag] = [hKey]
 		countDict[hKey] = countDict[hKey] + 1
 	if(hEx == False and tEx == False):
-		print('AddLink: no tag or blob; adding both.')
+		print('AddLink: Adding. ' + 'Tag:' + tag + " tBlob:" + tBlob[:15])
 		textBlobDict[hKey] = tBlob
 		countDict[hKey] = 1
 		tagDict[tag] = [hKey]
