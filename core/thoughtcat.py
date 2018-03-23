@@ -131,15 +131,15 @@ def uniontags(argList):
 	writeoplist(argList, unionList)
 
 '''
-Signature: String String -> List
-Purpose: Given two tag names, we intersect the two associated lists and return the common hash values in a new list.
+Signature: Iterable Iterable -> List
+Purpose: Given two iterables, return a list of all values [with repetition] of the first iterable that occur
+          at least once in the second iterable.
 '''
-def twolistintersect(hashList1, hashList2):
-	intList = []
-	for hashVal in hashList1:
-		if(hashVal in hashList2):
-			intList.append(hashVal)
-	return intList
+def twolistintersect(iterable1, iterable2):
+	return [e for e in iterable1 if e in iterable2]
+        # return list(set(iterable1).intersection(iterable2))
+	# That wouldn't include duplicates in iterable1.
+	# Consider not converting to lists, using sets where duplicates aren't expected anyway.
 
 '''
 Signature: List List -> Void
@@ -174,9 +174,9 @@ def intersecttags(argList):
 			print("Error: IntersectTags: Tag:" + tag + "has zero length list associated with it. Aborting operation.")
 			sys.exit(2)
 	#Now we start.
-	gatherList = twolistintersect(tagDict[argList[0]],tagDict[argList[1]])
+	gatherList = intersect(tagDict[argList[0]],tagDict[argList[1]])
 	for nextTag in argList[2:]:
-		gatherList = twolistintersect(gatherList, tagDict[nextTag])
+		gatherList = intersect(gatherList, tagDict[nextTag])
 	writeoplist(argList, gatherList)
 
 '''
