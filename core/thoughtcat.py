@@ -135,7 +135,7 @@ Signature: Iterable Iterable -> List
 Purpose: Given two iterables, return a list of all values [with repetition] of the first iterable that occur
           at least once in the second iterable.
 '''
-def twolistintersect(iterable1, iterable2):
+def intersect(iterable1, iterable2):
 	return [e for e in iterable1 if e in iterable2]
         # return list(set(iterable1).intersection(iterable2))
 	# That wouldn't include duplicates in iterable1.
