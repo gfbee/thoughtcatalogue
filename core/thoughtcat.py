@@ -123,11 +123,8 @@ def uniontags(argList):
 			print("Error: UniontTags: Tag:" + tag + "has zero length list associated with it. Aborting operation.")
 			sys.exit(2)
 	#Unionize
-	unionList = []
-	for tag in argList:
-		for hashVal in tagDict[tag]:
-			if (hashVal not in unionList): #keeps items unique.
-				unionList.append(hashVal)
+	list_of_hash_lists = [tagDict[tag] for tag in argList]
+	unionList = list(set([a_hash for hashes in list_of_hash_lists for a_hash in hashes]))
 	writeoplist(argList, unionList)
 
 '''
