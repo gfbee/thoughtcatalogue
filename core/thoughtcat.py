@@ -305,24 +305,23 @@ def printalltextblobs():
 	blobOut.close()
 
 '''
-Signature: String -> Void
-Purpose: Wrapper function to minimize code reusage.
+Signature: -> Void
+Purpose: Write model to filesystem.
+'''
+def write_model():
+    for (filename, dictionary) in ((pickleHashTableName, textBlobDict),
+                                   (pickleTagDictName,   tagDict),
+                                   (pickleCountDictName, countDict)):
+        write_dictionary_to_file(repoFileLocation + "/" + filename, dictionary)
 
 '''
-def writerepo():
-	writedicttofile(repoFileLocation + "/" + pickleHashTableName ,textBlobDict)
-	writedicttofile(repoFileLocation + "/" + pickleTagDictName, tagDict)
-	writedicttofile(repoFileLocation + "/" + pickleCountDictName, countDict)
-
+Signature: String Dictionary -> Void
+Purpose: Pickle one dictionary to a path.
 '''
-Signature: String -> Void
-Purpose: This Pickles one dictionary structure at a time; path and name as arguments
-'''
-def writedicttofile(apath, theDict):
-	#Note: we don't need to check if file exists: 'w' mode will truncate and overwrite anyways.
-	newPickleFile = open(apath, "wb")
-	pickle.dump(theDict, newPickleFile)
-	newPickleFile.close()
+def write_dictionary_to_file(path, dictionary):
+    # Don't need to check if file exists: 'w' mode will truncate and overwrite anyway.
+    with open(path, "wb") as pickle_file:
+        pickle.dump(dictionary, pickle_file)
 
 '''
 Signature: String -> Void
@@ -491,7 +490,7 @@ Purpose: Obvious
 def main():
 	initialize()
 	processargs()
-	writerepo()
+	write_model()
 
 if __name__ == "__main__":
 	main()
